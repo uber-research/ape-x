@@ -4,7 +4,7 @@ This repo replicates the results Horgan et al obtained:
 
 [1] [Distributed Prioritized Experience Replay](https://arxiv.org/abs/1803.00933)
 
-Our code is based off of code from OpenAI baselines. The original code and related paper from OpenAI can be found [here](https://github.com/openai/baselines). Their implementation of DQN was modified to use tensorflow custom ops.
+Our code is based off of code from OpenAI baselines. The original code and related paper from OpenAI can be found [here](https://github.com/openai/baselines). Their implementation of DQN was modified to use Tensorflow custom ops.
 
 Although Ape-X was originally a distributed algorithm, this implementation was meant to maximize throughput on a single machine. It was optimized for 2 GPUs (data gathering + optimization) but could be modified to use only one. With 2 GPUs and 20~40 CPUs you should be able to achieve human median performance in about 2 hours.
 
@@ -13,7 +13,7 @@ Although Ape-X was originally a distributed algorithm, this implementation was m
 clone repo
 
 ```
-git clone https://github.com/uber-research/apex.git
+git clone https://github.com/uber-research/ape-x.git
 ```
 
 create python3 virtual env
