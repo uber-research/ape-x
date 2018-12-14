@@ -375,7 +375,7 @@ def learn(env_f,
 
             if total_steps % target_network_update_freq == 0:
                 # Update target network periodically.
-                sess.run(update_target)
+                sess.run_step_fn(lambda step_context: step_context.session.run([update_target]))
 
 
 class ActorMonitor(object):
