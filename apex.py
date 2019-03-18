@@ -295,9 +295,13 @@ def learn(env_f,
     ####################################################################
     # Make Learner input pipeline
 
+    num_training_steps = tf.get_variable('training_steps', shape=(), dtype=tf.int64)
+    prioritized_replay_beta = U.linear_schedule(
+            num_training_steps, num_timesteps, prioritized_replay_beta0, 1.0)
+
     def make_training_input():
         with tf.variable_scope("training_input_preprocessing"):
-            transition = replay_buffer.sample_proportional_from_buffer(batch_size, prioritized_replay_beta0, minimum_sample_size=learning_starts)
+            transition = replay_buffer.sample_proportional_from_buffer(batch_size, prioritized_replay_beta, minimum_sample_size=learning_starts)
 
             # GPU because in our SKU the CPUs were the bottleneck
             with tf.device('/gpu:1'):
@@ -321,7 +325,6 @@ def learn(env_f,
 
     optimizer = {'adam': tf.train.AdamOptimizer, 'rmsprop': tf.train.RMSPropOptimizer}[optimizer['type']](**optimizer['args'])
 
-    num_training_steps = tf.get_variable('training_steps', shape=(), dtype=tf.int64)
     tf.summary.scalar('num_training_steps', num_training_steps)
     tf.summary.scalar('training_transitions', batch_size * num_training_steps)
 
