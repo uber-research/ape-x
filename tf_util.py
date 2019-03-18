@@ -602,6 +602,12 @@ def fancy_slice_2d(X, inds0, inds1):
     Xflat = tf.reshape(X, [-1])
     return tf.gather(Xflat, inds0 * ncols + inds1)
 
+def linear_schedule(t, schedule_timesteps, initial_p, final_p):
+    schedule = tf.linspace(initial_p, final_p, schedule_timesteps)
+    return tf.cond(t < schedule.shape[0],
+                   lambda: schedule[t],
+                   lambda: schedule[-1])
+
 # ================================================================
 # Scopes
 # ================================================================

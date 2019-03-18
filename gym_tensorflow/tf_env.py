@@ -14,9 +14,10 @@ See the License for the specific language governing permissions and
 limitations under the License.
 '''
 
-import numpy as np
 import os
 
+import gym
+import numpy as np
 import tensorflow as tf
 
 gym_tensorflow_module = tf.load_op_library(os.path.join(os.path.dirname(__file__), 'gym_tensorflow.so'))
