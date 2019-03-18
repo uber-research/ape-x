@@ -297,7 +297,7 @@ def learn(env_f,
 
     num_training_steps = tf.get_variable('training_steps', shape=(), dtype=tf.int64)
     prioritized_replay_beta = U.linear_schedule(
-            num_training_steps, num_timesteps, prioritized_replay_beta0, 1.0)
+            num_training_steps, max_timesteps, prioritized_replay_beta0, 1.0)
 
     def make_training_input():
         with tf.variable_scope("training_input_preprocessing"):
